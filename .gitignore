@@ -2,3 +2,5 @@ node_modules
 public
 .idea
 source/_data
+db.json
+_config.webstack.yml

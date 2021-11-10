@@ -48,21 +48,15 @@ def get_page_settings(pages_df, group_df):
 
 def get_group_settings(pages, group_df):
     groups = OrderedDict()
-    order_start = 10000
     for i, row in group_df.iterrows():
         if pd.isna(row['group_name']): continue
         if pd.isna(row['FontAwesome']):
             row['FontAwesome'] = default_fontawesome
-        if pd.isna(row['order']):
-            row['order'] = order_start
-            order_start += 10
         groups[row['group_name']] = row.to_dict()
     pages_group = pages.keys()
     for group in pages_group:
         if not group in groups:
-            groups[group] = {'FontAwesome': default_fontawesome, 'order': order_start}
-            order_start += 10
-    groups = OrderedDict(sorted(groups.items(), key=lambda x: x[1]['order']))
+            groups[group] = {'FontAwesome': default_fontawesome}
     return groups
 
 
